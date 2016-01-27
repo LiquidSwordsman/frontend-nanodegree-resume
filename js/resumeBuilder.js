@@ -18,8 +18,7 @@ var bio = {
         $("#header").append(HTMLbioPic.replace("%data%", bio.imageURL));
         $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMSG));
         var HTMLcontacts = "";
-        
-        for(var contact in bio.contact){
+        for(var contact in this.contact){
             if (bio.contact.hasOwnProperty(contact)){
                 HTMLcontacts += HTMLcontactGeneric.replace("%contact%", contact).replace("%data%", bio.contact[contact]);
             }
@@ -45,7 +44,11 @@ var work = {
                 "start": new Date(2013, 2),
                 "end": new Date(2013, 8)
             },
-            "location": "Seattle, WA",
+            "address": {
+                "lineOne": "1523 3rd Ave",
+                "lineTwo": "Seattle, WA 98101",
+                "location": "Seattle, WA",
+            },
             "description": "This is a job description."
         },
         {
@@ -55,8 +58,56 @@ var work = {
                 "start": new Date(2011, 7),
                 "end": new Date(2013, 2)
             },
-            "location": "Seattle, WA",
+            "address": {
+                "lineOne": "1908 4th Ave",
+                "lineTwo": "Seattle, WA 98101",
+                "location": "Seattle, WA",
+            },
             "description": "This is a job description."
+        },
+        {
+            "employer": "United Natural Foods",
+            "title": "3rd Shift Order Selector",
+            "dates": {
+                //TODO: Get Start Date
+                "start": new Date(2011, 5),
+                "end": new Date(2011, 5),
+            },
+            "address": {
+                "lineOne": "225 Cross Farm Ln",
+                "lineTwo": "York PA 17406",
+                "location": "York, PA",
+            },
+            "description": "This is a job description."
+        },
+        {
+            "employer": "Rutter's Farm Store",
+            "title": "3rd Shift Manager",
+            "dates": {
+                "start": new Date(2008, 8),
+                //TODO: Get End Date
+                "end": new Date(2008, 8),
+            },
+            "address": {
+                "lineOne": "2125 N Susquehanna Trail",
+                "lineTwo": "York PA 17406",
+                "location": "York PA",
+            },
+            "description": "Promoted from deli to 3rd shift manager handled store daily paperwork, inventory rotation, deposits"
+        },
+        {
+            "employer": "Old Country Buffet",
+            "title": "Line Coordinator",
+            "dates": {
+                "start": new Date(2006, 11),
+                "end": new Date(2008, 8)
+            },
+            "address": {
+                "lineOne": "905 Loucks Rd",
+                "lineTwo": "York, PA 17404",
+                "location": "Seattle, WA",
+            },
+            "description": "Cash handling, managing front end staff, promoted from bus boy to front end coordination"
         }
     ],
     display: function(){
@@ -69,7 +120,7 @@ var work = {
             $(".work-entry:last").append(formattedEmployerTitle);
             $(".work-entry:last").append(HTMLworkDates.replace("%data%", startDate + "-" + endDate));
             $(".work-entry:last").append(HTMLworkDescription.replace("%data%", job.description));
-            $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.location));
+            $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.address.location));
         });
     }
 };
@@ -82,6 +133,22 @@ var projects = [
     }
 ];
 var education = [
+    {
+        "name": "Central York High School",
+        "attended": "2004-2007",
+        "location": "York, PA, US",
+        "address-line-a": "601 Mundis Mill Rd",
+        "address-line-b": "York, PA 17406",
+        "phone": 7174243801,
+        "degree": "A.A.S.T.",
+        "url": null, /* TODO: GET URL */
+        "onlineCourses": {
+            "title": null,
+            "school": null,
+            "dates": null,
+            "url": null
+        }
+    },
     {
         "name": "Seattle Central College",
         "attended": "2013-2015",
@@ -106,8 +173,10 @@ var education = [
         "onlineCourses": {}
     }
 ];
-function logClick(loc){
-    console.log(document.elementFromPoint(loc.pageX, loc.pageY) + " (X: " + loc.pageX + ", Y: " + loc.pageY + ")");
+function logClick(loc) {
+    var x = loc.pageX;
+    var y = loc.pageY;
+    console.log(document.elementFromPoint(x, y) + " (X: " + x + ", Y: " + y + ")");
 }
 bio.display();
 work.display();
