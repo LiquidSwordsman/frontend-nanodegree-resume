@@ -15,7 +15,7 @@ var bio = {
 };
 var work = [
     {
-        "employer": "Radioshack",
+        "employer": "Radio Shack",
         "title": "Sales Associate",
         "dates": {
             "start": new Date(2013, 2),
@@ -101,7 +101,9 @@ work.forEach(function (job) {
         var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formattedEmployerTitle = formattedEmployer + formattedTitle;
         $(".work-entry:last").append(formattedEmployerTitle);
-        $(".work-entry:last").append(HTMLworkDates.replace("%data%", job.dates.start.getFullYear().toString() + "-" + job.dates.end.getFullYear().toString()));
+        var startDate = job.dates.start.getMonth().toString() + "/" + job.dates.start.getFullYear().toString();
+        var endDate = job.dates.end.getMonth().toString() + "/" + job.dates.end.getFullYear().toString();
+        $(".work-entry:last").append(HTMLworkDates.replace("%data%", startDate + "-" + endDate));
         $(".work-entry:last").append(HTMLworkDescription.replace("%data%", job.description));
         $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.location));
         
