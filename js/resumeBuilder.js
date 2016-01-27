@@ -106,6 +106,9 @@ var education = [
         "onlineCourses": {}
     }
 ];
-
+function logClick(loc){
+    console.log(document.elementFromPoint(loc.pageX, loc.pageY) + " (X: " + loc.pageX + ", Y: " + loc.pageY + ")");
+}
 bio.display();
 work.display();
+$(document).click(loc => logClick(loc));
