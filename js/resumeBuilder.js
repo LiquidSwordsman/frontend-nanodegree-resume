@@ -1,4 +1,9 @@
 "use strict";
+function dateHelper(startDate, endDate) {
+    var start = startDate.getMonth().toString() + "/" + startDate.getFullYear().toString();
+    var end = endDate.getMonth().toString() + "/" + endDate.getFullYear().toString();
+    return start + "-" + end;
+}
 /* Data */
 var bio = {
     "name": "Christopher Taylor",
@@ -114,11 +119,8 @@ var work = {
         this.jobs.forEach(function (job) {
             $("#workExperience").append(HTMLworkStart);
             var formattedEmployerTitle = HTMLworkEmployer.replace("%data%", job.employer) + HTMLworkTitle.replace("%data%", job.title);
-            var startDate = job.dates.start.getMonth().toString() + "/" + job.dates.start.getFullYear().toString();
-            var endDate = job.dates.end.getMonth().toString() + "/" + job.dates.end.getFullYear().toString();
-
             $(".work-entry:last").append(formattedEmployerTitle);
-            $(".work-entry:last").append(HTMLworkDates.replace("%data%", startDate + "-" + endDate));
+            $(".work-entry:last").append(HTMLworkDates.replace("%data%", dateHelper(job.dates.start, job.dates.end)));
             $(".work-entry:last").append(HTMLworkDescription.replace("%data%", job.description));
             $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.address.location));
         });
@@ -145,9 +147,7 @@ var projects = {
             this.projects.forEach(function (project) {
                 $("#projects").append(HTMLprojectStart);
                 $(".project-entry:last").append(HTMLprojectTitle.replace("%data%", project.title));
-                var startDate = project.dates.start.getMonth().toString() + "/" + project.dates.start.getFullYear().toString();
-                var endDate = project.dates.end.getMonth().toString() + "/" + project.dates.end.getFullYear().toString();
-                $(".project-entry:last").append(HTMLprojectDates.replace("%data%", startDate + "-" + endDate));
+                $(".project-entry:last").append(HTMLprojectDates.replace("%data%", dateHelper(project.dates.start, project.dates.end)));
                 $(".project-entry:last").append(HTMLprojectDescription.replace("%data%", project.description));
                 project.images.forEach(function(img) {
                     $(".project-entry:last").append(HTMLprojectImage.replace("%data%", img));
