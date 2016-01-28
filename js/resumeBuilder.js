@@ -74,8 +74,7 @@ var work = {
             "employer": "United Natural Foods",
             "title": "3rd Shift Order Selector",
             "dates": {
-                //TODO: Get Start Date
-                "start": new Date(2011, 5),
+                "start": new Date(2010, 5, 9),
                 "end": new Date(2011, 5),
             },
             "address": {
@@ -90,8 +89,7 @@ var work = {
             "title": "3rd Shift Manager",
             "dates": {
                 "start": new Date(2008, 8),
-                //TODO: Get End Date
-                "end": new Date(2008, 8),
+                "end": new Date(2010, 5, 9),
             },
             "address": {
                 "lineOne": "2125 N Susquehanna Trail",
@@ -165,7 +163,7 @@ var education = [
         "address-line-b": "York, PA 17406",
         "phone": 7174243801,
         "degree": "A.A.S.T.",
-        "url": null, /* TODO: GET URL */
+        "url": "http://hs.cysd.k12.pa.us/",
         "onlineCourses": {
             "title": null,
             "school": null,
