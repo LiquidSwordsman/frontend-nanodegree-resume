@@ -124,14 +124,38 @@ var work = {
         });
     }
 };
-var projects = [
-    {
-        "title": null,
-        "dates": null,
-        "description": null,
-        "images": []
+var projects = {
+    "projects": [
+        {
+            "title": "Sample Title",
+            "dates": {
+                start: new Date(1970, 0),
+                end: new Date(1970, 0)
+            },
+            "description": "Echo park polaroid blue bottle, tote bag swag fingerstache paleo deep v direct trade small batch actually put a bird on it. XOXO shabby chic squid paleo, authentic trust fund austin williamsburg tofu pop-up celiac selvage. Selfies helvetica distillery roof party leggings venmo, typewriter man braid kickstarter. Lumbersexual seitan scenester humblebrag. Brunch salvia mixtape blog, marfa trust fund tumblr. Vinyl tote bag fanny pack brunch, lumbersexual bitters schlitz +1 ramps green juice heirloom etsy cliche. Fap truffaut four dollar toast, austin mustache kinfolk poutine green juice bespoke street art tattooed.",
+            "images": [
+                "http://liquidswords.ninja/resume/images/pic.jpg",
+                "http://liquidswords.ninja/resume/images/pic.jpg",
+                "http://liquidswords.ninja/resume/images/pic.jpg"
+            ]
+        }
+    ],
+    display: function () {
+        if (this.projects.length > 0) {
+            this.projects.forEach(function (project) {
+                $("#projects").append(HTMLprojectStart);
+                $(".project-entry:last").append(HTMLprojectTitle.replace("%data%", project.title));
+                var startDate = project.dates.start.getMonth().toString() + "/" + project.dates.start.getFullYear().toString();
+                var endDate = project.dates.end.getMonth().toString() + "/" + project.dates.end.getFullYear().toString();
+                $(".project-entry:last").append(HTMLprojectDates.replace("%data%", startDate + "-" + endDate));
+                $(".project-entry:last").append(HTMLprojectDescription.replace("%data%", project.description));
+                project.images.forEach(function(img) {
+                    $(".project-entry:last").append(HTMLprojectImage.replace("%data%", img));
+                });
+            });
+        }
     }
-];
+};
 var education = [
     {
         "name": "Central York High School",
@@ -180,4 +204,5 @@ function logClick(loc) {
 }
 bio.display();
 work.display();
+projects.display();
 $(document).click(loc => logClick(loc));
