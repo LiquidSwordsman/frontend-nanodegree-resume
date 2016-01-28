@@ -1,4 +1,9 @@
 "use strict";
+function logClick(loc) {
+    var x = loc.pageX;
+    var y = loc.pageY;
+    console.log(document.elementFromPoint(x, y) + " (X: " + x + ", Y: " + y + ")");
+}
 function dateHelper(startDate, endDate) {
     var start = startDate.getMonth().toString() + "/" + startDate.getFullYear().toString();
     var end = endDate.getMonth().toString() + "/" + endDate.getFullYear().toString();
@@ -9,7 +14,7 @@ var bio = {
     "name": "Christopher Taylor",
     "role": "Front-End Web Developer",
     "welcomeMSG": "A WELCOME MESSAGE GOES HERE",
-    "contact": {
+    "contacts": {
         "location": "Seattle, WA",
         "github": "LiquidSwordsman",
         "email": "ctaylor@liquidswords.ninja",
@@ -23,9 +28,9 @@ var bio = {
         $("#header").append(HTMLbioPic.replace("%data%", bio.imageURL));
         $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMSG));
         var HTMLcontacts = "";
-        for(var contact in this.contact){
-            if (bio.contact.hasOwnProperty(contact)){
-                HTMLcontacts += HTMLcontactGeneric.replace("%contact%", contact).replace("%data%", bio.contact[contact]);
+        for(var contact in this.contacts){
+            if (bio.contacts.hasOwnProperty(contact)){
+                HTMLcontacts += HTMLcontactGeneric.replace("%contact%", contact).replace("%data%", bio.contacts[contact]);
             }
         }
         $("#topContacts").append(HTMLcontacts);
@@ -52,8 +57,8 @@ var work = {
             "address": {
                 "lineOne": "1523 3rd Ave",
                 "lineTwo": "Seattle, WA 98101",
-                "location": "Seattle, WA",
             },
+            "location": "Seattle, WA",
             "description": "This is a job description."
         },
         {
@@ -66,8 +71,8 @@ var work = {
             "address": {
                 "lineOne": "1908 4th Ave",
                 "lineTwo": "Seattle, WA 98101",
-                "location": "Seattle, WA",
             },
+            "location": "Seattle, WA",
             "description": "This is a job description."
         },
         {
@@ -80,8 +85,8 @@ var work = {
             "address": {
                 "lineOne": "225 Cross Farm Ln",
                 "lineTwo": "York PA 17406",
-                "location": "York, PA",
             },
+            "location": "York, PA",
             "description": "This is a job description."
         },
         {
@@ -94,8 +99,8 @@ var work = {
             "address": {
                 "lineOne": "2125 N Susquehanna Trail",
                 "lineTwo": "York PA 17406",
-                "location": "York PA",
             },
+            "location": "York PA",
             "description": "Promoted from deli to 3rd shift manager handled store daily paperwork, inventory rotation, deposits"
         },
         {
@@ -108,8 +113,8 @@ var work = {
             "address": {
                 "lineOne": "905 Loucks Rd",
                 "lineTwo": "York, PA 17404",
-                "location": "Seattle, WA",
             },
+            "location": "Seattle, WA",
             "description": "Cash handling, managing front end staff, promoted from bus boy to front end coordination"
         }
     ],
@@ -120,7 +125,7 @@ var work = {
             $(".work-entry:last").append(formattedEmployerTitle);
             $(".work-entry:last").append(HTMLworkDates.replace("%data%", dateHelper(job.dates.start, job.dates.end)));
             $(".work-entry:last").append(HTMLworkDescription.replace("%data%", job.description));
-            $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.address.location));
+            $(".work-entry:last").append(HTMLworkLocation.replace("%data%", job.location));
         });
     }
 };
@@ -154,53 +159,51 @@ var projects = {
         }
     }
 };
-var education = [
-    {
-        "name": "Central York High School",
-        "attended": "2004-2007",
-        "location": "York, PA, US",
-        "address-line-a": "601 Mundis Mill Rd",
-        "address-line-b": "York, PA 17406",
-        "phone": 7174243801,
-        "degree": "A.A.S.T.",
-        "url": "http://hs.cysd.k12.pa.us/",
-        "onlineCourses": {
-            "title": null,
-            "school": null,
-            "dates": null,
-            "url": null
+var education = {
+    "schools": [
+        {
+            "name": "Central York High School",
+            "attended": "2004-2007",
+            "location": "York, PA, US",
+            "address-line-a": "601 Mundis Mill Rd",
+            "address-line-b": "York, PA 17406",
+            "phone": 7174243801,
+            "degree": "A.A.S.T.",
+            "url": "http://hs.cysd.k12.pa.us/",
+            "onlineCourses": {
+                "title": null,
+                "school": null,
+                "dates": null,
+                "url": null
+            }
+        },
+        {
+            "name": "Seattle Central College",
+            "attended": "2013-2015",
+            "location": "Seattle, WA, US",
+            "degree": "A.A.S.T.",
+            "major": "Programming",
+            "url": "http://www.seattlecentral.edu/",
+            "onlineCourses": {
+                "title": null,
+                "school": null,
+                "dates": null,
+                "url": null
+            }
+        },
+        {
+            "name": "Udacity",
+            "attended": "2015-Present",
+            "location": "Online",
+            "degree": "Nanodegree",
+            "major": "Front-End Web Developer",
+            "url": "https://www.udacity.com/",
+            "onlineCourses": {}
         }
-    },
-    {
-        "name": "Seattle Central College",
-        "attended": "2013-2015",
-        "location": "Seattle, WA, US",
-        "degree": "A.A.S.T.",
-        "major": "Programming",
-        "url": "http://www.seattlecentral.edu/",
-        "onlineCourses": {
-            "title": null,
-            "school": null,
-            "dates": null,
-            "url": null
-        }
-    },
-    {
-        "name": "Udacity",
-        "attended": "2015-Present",
-        "location": "Online",
-        "degree": "Nanodegree",
-        "major": "Front-End Web Developer",
-        "url": "https://www.udacity.com/",
-        "onlineCourses": {}
-    }
-];
-function logClick(loc) {
-    var x = loc.pageX;
-    var y = loc.pageY;
-    console.log(document.elementFromPoint(x, y) + " (X: " + x + ", Y: " + y + ")");
-}
+    ]
+};
 bio.display();
 work.display();
 projects.display();
+$("#mapDiv").append(googleMap);
 $(document).click(loc => logClick(loc));
