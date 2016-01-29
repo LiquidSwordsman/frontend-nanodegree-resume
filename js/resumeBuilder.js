@@ -5,10 +5,19 @@ function logClick(loc) {
     console.log(document.elementFromPoint(x, y) + " (X: " + x + ", Y: " + y + ")");
 }
 function dateHelper(startDate, endDate) {
-    var start = startDate.getMonth().toString() + "/" + startDate.getFullYear().toString();
-    var end = endDate.getMonth().toString() + "/" + endDate.getFullYear().toString();
+    var start = "";
+    var end = "";
+    if (startDate.getMonth().toString()) {
+        start += startDate.getMonth().toString() + "/";
+    }
+    start += startDate.getFullYear().toString();
+    if (endDate.getMonth().toString()) {
+        end += endDate.getMonth().toString() + "/";
+    }
+    end += endDate.getFullYear().toString();
     return start + "-" + end;
 }
+
 /* Data */
 var bio = {
     "name": "Christopher Taylor",
@@ -132,17 +141,13 @@ var work = {
 var projects = {
     "projects": [
         {
-            "title": "Sample Title",
+            "title": null,
             "dates": {
-                start: new Date(1970, 0),
-                end: new Date(1970, 0)
+                start: null,
+                end: null
             },
-            "description": "Echo park polaroid blue bottle, tote bag swag fingerstache paleo deep v direct trade small batch actually put a bird on it. XOXO shabby chic squid paleo, authentic trust fund austin williamsburg tofu pop-up celiac selvage. Selfies helvetica distillery roof party leggings venmo, typewriter man braid kickstarter. Lumbersexual seitan scenester humblebrag. Brunch salvia mixtape blog, marfa trust fund tumblr. Vinyl tote bag fanny pack brunch, lumbersexual bitters schlitz +1 ramps green juice heirloom etsy cliche. Fap truffaut four dollar toast, austin mustache kinfolk poutine green juice bespoke street art tattooed.",
-            "images": [
-                "http://liquidswords.ninja/resume/images/pic.jpg",
-                "http://liquidswords.ninja/resume/images/pic.jpg",
-                "http://liquidswords.ninja/resume/images/pic.jpg"
-            ]
+            "description": null,
+            "images": [null, null]
         }
     ],
     display: function () {
@@ -162,48 +167,65 @@ var projects = {
 var education = {
     "schools": [
         {
-            "name": "Central York High School",
-            "attended": "2004-2007",
-            "location": "York, PA, US",
-            "address-line-a": "601 Mundis Mill Rd",
-            "address-line-b": "York, PA 17406",
-            "phone": 7174243801,
-            "degree": "A.A.S.T.",
-            "url": "http://hs.cysd.k12.pa.us/",
-            "onlineCourses": {
-                "title": null,
-                "school": null,
-                "dates": null,
-                "url": null
-            }
-        },
-        {
-            "name": "Seattle Central College",
-            "attended": "2013-2015",
-            "location": "Seattle, WA, US",
-            "degree": "A.A.S.T.",
-            "major": "Programming",
-            "url": "http://www.seattlecentral.edu/",
-            "onlineCourses": {
-                "title": null,
-                "school": null,
-                "dates": null,
-                "url": null
-            }
-        },
-        {
             "name": "Udacity",
-            "attended": "2015-Present",
+            "attended": {
+                "start": new Date(2016, 1),
+                "end": new Date(2016, 4)
+            },
             "location": "Online",
             "degree": "Nanodegree",
             "major": "Front-End Web Developer",
-            "url": "https://www.udacity.com/",
             "onlineCourses": {}
+        },
+        {
+            "name": "Seattle Central College",
+            "attended": {
+                "start": new Date(2013),
+                "end": new Date(2015)
+            },
+            "location": "Seattle, WA, US",
+            "degree": "A.A.S.T.",
+            "major": "Programming",
+            "onlineCourses": {
+                "title": null,
+                "school": null,
+                "dates": null,
+                "url": null
+            }
+        },
+        {
+            "name": "Central York High School",
+            "attended": {
+                "start": new Date(2004),
+                "end": new Date(2007)
+            },
+            "location": "York, PA, US",
+            "address-line-a": "601 Mundis Mill Rd",
+            "address-line-b": "York, PA 17406",
+            "degree": "Diploma",
+            "major": "Computer Science",
+            "onlineCourses": {
+                "title": null,
+                "school": null,
+                "dates": null,
+                "url": null
+            }
         }
-    ]
+    ],
+    display: function () {
+        this.schools.forEach(function (school) {
+            $("#education").append(HTMLschoolStart);
+            $(".education-entry:last").append(HTMLschoolName.replace("%data%", school.name));
+            $(".education-entry:last").append(HTMLschoolDegree.replace("%data%", school.degree));
+            $(".education-entry:last").append(HTMLschoolDates.replace("%data%", dateHelper(school.attended.start, school.attended.end)));
+            $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", school.location));
+            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", school.major));
+        });
+    }
 };
 bio.display();
 work.display();
-projects.display();
+//projects.display();
+education.display();
 $("#mapDiv").append(googleMap);
 $(document).click(loc => logClick(loc));
