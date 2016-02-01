@@ -24,26 +24,26 @@ function dateHelper(startDate, endDate) {
 var bio = {
     "name": "Christopher Taylor",
     "role": "Front-End Web Developer",
-    "welcomeMsg": "A WELCOME MESSAGE GOES HERE",
+    "welcomeMessage": "A WELCOME MESSAGE GOES HERE",
     "contacts": {
         "location": "Seattle, WA",
         "github": "LiquidSwordsman",
         "email": "ctaylor@liquidswords.ninja",
-        "cell": "206-922-9835"
+        "mobile": "206-922-9835"
     },
-    "imageURL": "http://liquidswords.ninja/resume/images/pic.jpg",
+    "biopic": "http://liquidswords.ninja/resume/images/pic.jpg",
     "skills": ["PHP", "HTML", "CSS", "JavaScript", "jQuery", "Git", "C#", "Python 2.X"],
     buildContacts: function() {
         var contacts = "";
-        contacts += HTMLmobile.replace(new RegExp("%data%", 'g'), this.contacts.cell);
+        contacts += HTMLmobile.replace(new RegExp("%data%", 'g'), this.contacts.mobile);
         contacts += HTMLgithub.replace(new RegExp("%data%", 'g'), this.contacts.github);
         contacts += HTMLemail.replace(new RegExp("%data%", 'g'), this.contacts.email);
         contacts += HTMLlocation.replace("%data%", this.contacts.location);
         return contacts;
     },
     display: function() {
-        $("header").prepend(HTMLbioPic.replace("%data%", bio.imageURL));
-        $("#bio-box").prepend(HTMLwelcomeMsg.replace("%data%", bio.welcomeMsg));
+        $("header").prepend(HTMLbioPic.replace("%data%", bio.biopic));
+        $("#bio-box").prepend(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
         $("#bio-box").prepend(HTMLheaderRole.replace("%data%", bio.role));
         $("#bio-box").prepend(HTMLheaderName.replace("%data%", bio.name));
         var contacts = this.buildContacts();
@@ -164,25 +164,27 @@ var projects = {
 var education = {
     "schools": [{
         "name": "Udacity",
-        "attended": {
+        "dates": {
             "start": new Date(2016, 1),
             "end": new Date(2016, 4)
         },
         "location": "Online",
         "degree": "Nanodegree",
-        "major": "Front-End Web Developer",
+        "majors": ["Front-End Web Developer"],
+        "url": "https://www.udacity.com/"
     }, {
         "name": "Seattle Central College",
-        "attended": {
+        "dates": {
             "start": new Date(2013),
             "end": new Date(2015)
         },
         "location": "Seattle, WA, US",
         "degree": "A.A.S.T.",
-        "major": "Programming",
+        "majors": ["Programming"],
+        "url": "http://www.seattlecentral.edu/"
     }, {
         "name": "Central York High School",
-        "attended": {
+        "dates": {
             "start": new Date(2004),
             "end": new Date(2007)
         },
@@ -190,37 +192,38 @@ var education = {
         "address-line-a": "601 Mundis Mill Rd",
         "address-line-b": "York, PA 17406",
         "degree": "Diploma",
-        "major": "Computer Science",
+        "majors": ["Computer Science"],
+        "url": "http://hs.cysd.k12.pa.us/"
     }, ],
     "onlineCourses": [{
         "title": "Intro to HTML and CSS",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }, {
         "title": "Responsive Web Design Fundamentals",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }, {
         "title": "Responsive Images",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }, {
         "title": "Javascript Basics",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }, {
         "title": "Intro to jQuery",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }, {
         "title": "How to Use Git and GitHub",
         "school": "Udacity",
-        "dates": 2015,
+        "date": "2015",
         "url": "http://www.udacity.com"
     }],
     buildSchools: function() {
@@ -228,9 +231,9 @@ var education = {
             $("#education").append(HTMLschoolStart);
             $(".education-entry:last").append(HTMLschoolName.replace("%data%", school.name));
             $(".education-entry:last").append(HTMLschoolDegree.replace("%data%", school.degree));
-            $(".education-entry:last").append(HTMLschoolDates.replace("%data%", dateHelper(school.attended.start, school.attended.end)));
+            $(".education-entry:last").append(HTMLschoolDates.replace("%data%", dateHelper(school.dates.start, school.dates.end)));
             $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", school.location));
-            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", school.major));
+            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", school.majors.join(", ")));
         });
     },
     buildOnlineClasses: function() {
@@ -239,7 +242,7 @@ var education = {
             $("#education").append(HTMLschoolStart);
             $(".education-entry:last").append(HTMLonlineTitle.replace("%data%", course.title));
             $(".education-entry:last").append(HTMLonlineSchool.replace("%data%", course.school));
-            $(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.dates));
+            $(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.date));
             $(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url));
         });
     },
