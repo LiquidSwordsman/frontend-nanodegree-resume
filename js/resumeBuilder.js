@@ -22,7 +22,7 @@ function dateHelper(startDate, endDate) {
 var bio = {
     "name": "Christopher Taylor",
     "role": "Front-End Web Developer",
-    "welcomeMSG": "A WELCOME MESSAGE GOES HERE",
+    "welcomeMsg": "A WELCOME MESSAGE GOES HERE",
     "contacts": {
         "location": "Seattle, WA",
         "github": "LiquidSwordsman",
@@ -30,23 +30,26 @@ var bio = {
         "cell": "206-922-9835"
     },
     "imageURL": "http://liquidswords.ninja/resume/images/pic.jpg",
-    "skills": ["PHP", "HTML", "CSS", "JavaScript", "Git", "C#", "Python 2.X"],
+    "skills": ["PHP", "HTML", "CSS", "JavaScript", "jQuery", "Git", "C#", "Python 2.X"],
+    buildContacts: function () {
+        var contacts = "";
+        contacts += HTMLmobile.replace(new RegExp("%data%", 'g'), this.contacts.cell);
+        contacts += HTMLgithub.replace(new RegExp("%data%", 'g'), this.contacts.github);
+        contacts += HTMLemail.replace(new RegExp("%data%", 'g'), this.contacts.email);
+        contacts += HTMLlocation.replace("%data%", this.contacts.location);
+        return contacts;
+    },
     display: function(){
-        $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
-        $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
-        $("#header").append(HTMLbioPic.replace("%data%", bio.imageURL));
-        $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMSG));
-        var HTMLcontacts = "";
-        for(var contact in this.contacts){
-            if (bio.contacts.hasOwnProperty(contact)){
-                HTMLcontacts += HTMLcontactGeneric.replace("%contact%", contact).replace("%data%", bio.contacts[contact]);
-            }
-        }
-        $("#topContacts").append(HTMLcontacts);
-        $("#footerContacts").append(HTMLcontacts);
+        $("header").prepend(HTMLbioPic.replace("%data%", bio.imageURL));
+        $("#bio-box").prepend(HTMLwelcomeMsg.replace("%data%", bio.welcomeMsg));
+        $("#bio-box").prepend(HTMLheaderRole.replace("%data%", bio.role));
+        $("#bio-box").prepend(HTMLheaderName.replace("%data%", bio.name));
+        var contacts = this.buildContacts();
+        $("#topContacts").append(contacts);
+        $("#footerContacts").append(contacts);
 
         if (bio.skills.length > 0) {
-            $("#header").append(HTMLskillsStart);
+            $("#bio-box").append(HTMLskillsStart);
 
             bio.skills.forEach(function (skill) {
                 $("#skills").append(HTMLskills.replace("%data%", skill));
@@ -110,7 +113,7 @@ var work = {
                 "lineTwo": "York PA 17406",
             },
             "location": "York PA",
-            "description": "Promoted from deli to 3rd shift manager handled store daily paperwork, inventory rotation, deposits"
+            "description": "Managed third shift employees, prepared stores daily paperwork, handled inventory rotation, made deposits."
         },
         {
             "employer": "Old Country Buffet",

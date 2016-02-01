@@ -1,3 +1,4 @@
+header,
 body,
 div,
 ul,
@@ -128,7 +129,8 @@ a {
 }
 
 /* TODO: Replace with image later */
-#header {
+header {
+  padding: 1% 4.5%;
   background-color: #484848;
 }
 
@@ -166,6 +168,10 @@ span {
 
 #lets-connect {
   text-align: center;
+}
+#topContacts{
+    text-align: left;
+    justify-content: space-between;
 }
 
 /* Media queries to handle various device widths */
