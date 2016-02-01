@@ -175,7 +175,6 @@ var education = {
             "location": "Online",
             "degree": "Nanodegree",
             "major": "Front-End Web Developer",
-            "onlineCourses": {}
         },
         {
             "name": "Seattle Central College",
@@ -186,12 +185,6 @@ var education = {
             "location": "Seattle, WA, US",
             "degree": "A.A.S.T.",
             "major": "Programming",
-            "onlineCourses": {
-                "title": null,
-                "school": null,
-                "dates": null,
-                "url": null
-            }
         },
         {
             "name": "Central York High School",
@@ -204,15 +197,47 @@ var education = {
             "address-line-b": "York, PA 17406",
             "degree": "Diploma",
             "major": "Computer Science",
-            "onlineCourses": {
-                "title": null,
-                "school": null,
-                "dates": null,
-                "url": null
-            }
-        }
+        },
     ],
-    display: function () {
+    "onlineCourses": [
+            {
+                "title": "Intro to HTML and CSS",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            },
+            {
+                "title": "Responsive Web Design Fundamentals",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            },
+            {
+                "title": "Responsive Images",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            },
+            {
+                "title": "Javascript Basics",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            },
+            {
+                "title": "Intro to jQuery",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            },
+            {
+                "title": "How to Use Git and GitHub",
+                "school": "Udacity",
+                "dates": 2015,
+                "url": "http://www.udacity.com"
+            }
+    ],
+    buildSchools: function () {
         this.schools.forEach(function (school) {
             $("#education").append(HTMLschoolStart);
             $(".education-entry:last").append(HTMLschoolName.replace("%data%", school.name));
@@ -221,6 +246,20 @@ var education = {
             $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", school.location));
             $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", school.major));
         });
+    },
+    buildOnlineClasses: function() {
+        $("#education").append(HTMLonlineClasses);
+        this.onlineCourses.forEach(function (course) {
+            $("#education").append(HTMLschoolStart);
+            $(".education-entry:last").append(HTMLonlineTitle.replace("%data%", course.title));
+            $(".education-entry:last").append(HTMLonlineSchool.replace("%data%", course.school));
+            $(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.dates));
+             $(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url));
+        });
+    },
+    display: function () {
+        this.buildSchools();
+        this.buildOnlineClasses();
     }
 };
 bio.display();
